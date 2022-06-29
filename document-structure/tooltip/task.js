@@ -3,11 +3,11 @@ let tooltip = 0;
 a.forEach((item) => {
   item.addEventListener("click", (e) => {
     if (item.getAttribute("title") === tooltip.textContent) {
-      document.querySelector(".tooltip_active").remove();
+      document.querySelector(".tooltip").classList.toggle("tooltip_active");
       e.preventDefault();
       return;
-    } else if (document.querySelector(".tooltip_active")) {
-      document.querySelector(".tooltip_active").remove();
+    } else if (document.querySelector(".tooltip")) {
+      document.querySelector(".tooltip").remove();
     }
     tooltip = document.createElement("div");
     tooltip.textContent = item.getAttribute("title");

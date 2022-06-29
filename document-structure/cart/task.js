@@ -29,15 +29,20 @@ products.forEach((item) => {
       .getAttribute("src")}">
     <div class="cart__product-count">${quantity.textContent}</div>`;
 
-    let products = cart.querySelector(".cart__products");
-    for (let elem of products.querySelectorAll(".cart__product")) {
-      if (elem.getAttribute("data-id") === inCart.getAttribute("data-id")) {
-        elem.querySelector(".cart__product-count").textContent =
-          Number(elem.querySelector(".cart__product-count").textContent) +
-          Number(inCart.querySelector(".cart__product-count").textContent);
-        return;
-      }
+    let productsInCart = Array.from(
+      cart.querySelector(".cart__products").querySelectorAll(".cart__product")
+    );
+
+    let product = productsInCart.find((elem) => {
+      return elem.getAttribute("data-id") === inCart.getAttribute("data-id");
+    });
+    if (product) {
+      product.querySelector(".cart__product-count").textContent =
+        Number(product.querySelector(".cart__product-count").textContent) +
+        Number(inCart.querySelector(".cart__product-count").textContent);
+      return;
     }
+
     cart.querySelector(".cart__products").append(inCart);
   });
 });
